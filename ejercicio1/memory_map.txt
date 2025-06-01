@@ -1,0 +1,154 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD app.o
+LOAD draw.o
+LOAD figuras.o
+LOAD font.o
+LOAD nave.o
+LOAD star.o
+LOAD star2.o
+LOAD start.o
+                0x0000000000080000                . = 0x80000
+
+.text           0x0000000000080000    0x90d30
+ *(.text.boot)
+ .text.boot     0x0000000000080000    0x100c8 start.o
+                0x0000000000080000                _start
+ *(.text*)
+ .text          0x00000000000900c8      0x408 app.o
+                0x00000000000900c8                main
+ .text          0x00000000000904d0       0x90 draw.o
+                0x00000000000904d0                draw_char_scaled
+ .text          0x0000000000090560      0x18c figuras.o
+                0x0000000000090560                circulo
+                0x00000000000905c0                draw_rect
+                0x000000000009060c                elipse_simple
+                0x0000000000090688                triangulo
+ .text          0x00000000000906ec       0x30 font.o
+                0x00000000000906ec                font_O
+                0x00000000000906f4                font_D
+                0x00000000000906fc                font_C
+                0x0000000000090704                font_2
+                0x000000000009070c                font_0
+                0x0000000000090714                font_5
+ .text          0x000000000009071c      0x4fc nave.o
+                0x000000000009071c                cohete
+                0x0000000000090758                cabeza_cohete
+                0x00000000000907cc                luces
+                0x0000000000090910                aleta_izquierda
+                0x00000000000909bc                aleta_derecha
+                0x0000000000090a68                ventanillas
+                0x0000000000090b14                propulsores
+                0x0000000000090be8                dibujar_nave
+ .text          0x0000000000090c18       0x90 star.o
+                0x0000000000090c18                star
+ .text          0x0000000000090ca8       0x88 star2.o
+                0x0000000000090ca8                star2
+ .text          0x0000000000090d30    0x80000 start.o
+
+.iplt           0x0000000000110d30        0x0
+ .iplt          0x0000000000110d30        0x0 app.o
+
+.rela.dyn       0x0000000000110d30        0x0
+ .rela.iplt     0x0000000000110d30        0x0 app.o
+ .rela.text.boot
+                0x0000000000110d30        0x0 app.o
+
+.data           0x0000000000110d30        0x0
+ .data          0x0000000000110d30        0x0 app.o
+ .data          0x0000000000110d30        0x0 draw.o
+ .data          0x0000000000110d30        0x0 figuras.o
+ .data          0x0000000000110d30        0x0 font.o
+ .data          0x0000000000110d30        0x0 nave.o
+ .data          0x0000000000110d30        0x0 star.o
+ .data          0x0000000000110d30        0x0 star2.o
+ .data          0x0000000000110d30        0x0 start.o
+
+.igot.plt       0x0000000000110d30        0x0
+ .igot.plt      0x0000000000110d30        0x0 app.o
+
+.bss            0x0000000000110d30        0x0
+ *(.bss*)
+ .bss           0x0000000000110d30        0x0 app.o
+ .bss           0x0000000000110d30        0x0 draw.o
+ .bss           0x0000000000110d30        0x0 figuras.o
+ .bss           0x0000000000110d30        0x0 font.o
+ .bss           0x0000000000110d30        0x0 nave.o
+ .bss           0x0000000000110d30        0x0 star.o
+ .bss           0x0000000000110d30        0x0 star2.o
+ .bss           0x0000000000110d30        0x0 start.o
+
+.bss            0x0000000000110d30        0x0
+                0x0000000000110d30                . = ALIGN (0x10)
+                0x0000000000110d30                __bss_start = .
+ *(.bss .bss.*)
+ *(COMMON)
+                0x0000000000110d30                __bss_end = .
+                0x0000000000110d30                _end = .
+                0x0000000000000000                __bss_size = ((__bss_end - __bss_start) >> 0x3)
+OUTPUT(kernel8.elf elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_line     0x0000000000000000      0x4b0
+ .debug_line    0x0000000000000000      0x12e app.o
+ .debug_line    0x000000000000012e       0x5d draw.o
+ .debug_line    0x000000000000018b       0xa5 figuras.o
+ .debug_line    0x0000000000000230      0x178 nave.o
+ .debug_line    0x00000000000003a8       0x5b star.o
+ .debug_line    0x0000000000000403       0x5a star2.o
+ .debug_line    0x000000000000045d       0x53 start.o
+
+.debug_info     0x0000000000000000      0x142
+ .debug_info    0x0000000000000000       0x2e app.o
+ .debug_info    0x000000000000002e       0x2e draw.o
+ .debug_info    0x000000000000005c       0x2e figuras.o
+ .debug_info    0x000000000000008a       0x2e nave.o
+ .debug_info    0x00000000000000b8       0x2e star.o
+ .debug_info    0x00000000000000e6       0x2e star2.o
+ .debug_info    0x0000000000000114       0x2e start.o
+
+.debug_abbrev   0x0000000000000000       0x8c
+ .debug_abbrev  0x0000000000000000       0x14 app.o
+ .debug_abbrev  0x0000000000000014       0x14 draw.o
+ .debug_abbrev  0x0000000000000028       0x14 figuras.o
+ .debug_abbrev  0x000000000000003c       0x14 nave.o
+ .debug_abbrev  0x0000000000000050       0x14 star.o
+ .debug_abbrev  0x0000000000000064       0x14 star2.o
+ .debug_abbrev  0x0000000000000078       0x14 start.o
+
+.debug_aranges  0x0000000000000000      0x150
+ .debug_aranges
+                0x0000000000000000       0x30 app.o
+ .debug_aranges
+                0x0000000000000030       0x30 draw.o
+ .debug_aranges
+                0x0000000000000060       0x30 figuras.o
+ .debug_aranges
+                0x0000000000000090       0x30 nave.o
+ .debug_aranges
+                0x00000000000000c0       0x30 star.o
+ .debug_aranges
+                0x00000000000000f0       0x30 star2.o
+ .debug_aranges
+                0x0000000000000120       0x30 start.o
+
+.debug_str      0x0000000000000000       0xb6
+ .debug_str     0x0000000000000000       0x87 app.o
+ .debug_str     0x0000000000000087        0x7 draw.o
+                                         0x88 (size before relaxing)
+ .debug_str     0x000000000000008e        0xa figuras.o
+                                         0x8b (size before relaxing)
+ .debug_str     0x0000000000000098        0x7 nave.o
+                                         0x88 (size before relaxing)
+ .debug_str     0x000000000000009f        0x7 star.o
+                                         0x88 (size before relaxing)
+ .debug_str     0x00000000000000a6        0x8 star2.o
+                                         0x89 (size before relaxing)
+ .debug_str     0x00000000000000ae        0x8 start.o
+                                         0x89 (size before relaxing)
